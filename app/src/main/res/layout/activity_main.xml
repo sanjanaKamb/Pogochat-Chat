@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ece496.pogochat_chat.MainActivity" >
+    tools:context="com.nullterminator.pogochat.MainActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"

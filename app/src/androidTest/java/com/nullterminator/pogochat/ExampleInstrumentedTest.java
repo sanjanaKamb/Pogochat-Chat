@@ -1,4 +1,4 @@
-package com.example.ece496.pogochat_chat;
+package com.nullterminator.pogochat;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.ece496.pogochat_chat", appContext.getPackageName());
+        assertEquals("com.nullterminator.pogochat", appContext.getPackageName());
     }
 }

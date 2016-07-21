@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Pokemon Go Chat</string>
+    <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -13,4 +14,6 @@
     <string name="welcome">Welcome</string>
     <string name="btn_logout">LOGOUT</string>
     <string name="color">Color</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
