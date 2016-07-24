@@ -65,20 +65,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // only for gingerbread and newer versions
-            int hasWriteContactsPermission = checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            int hasWriteContactsPermission = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION);
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-                if (!shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                if (!shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
                     showMessageOKCancel("You need to allow access to Location",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                                    requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                                             REQUEST_CODE_ASK_PERMISSIONS);
                                 }
                             });
                     return;
                 }
-                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return;
             }
@@ -113,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.setMyLocationEnabled(true);
                 } else {
                     // Permission Denied
-                    Toast.makeText(MapsActivity.this, "ACCESS_COARSE_LOCATION Denied", Toast.LENGTH_SHORT)
+                    Toast.makeText(MapsActivity.this, "ACCESS_FINE_LOCATION Denied", Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
