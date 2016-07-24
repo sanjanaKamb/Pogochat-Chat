@@ -1,0 +1,19 @@
+<resources>
+    <!--
+    Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=53:4B:35:5A:32:41:2C:8F:AD:87:CA:9F:B3:2E:24:75:AC:F3:EB:D5%3Bcom.nullterminator.pogochat
+
+    You can also add your credentials to an existing key, using this line:
+    53:4B:35:5A:32:41:2C:8F:AD:87:CA:9F:B3:2E:24:75:AC:F3:EB:D5;com.nullterminator.pogochat
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAY3uUusDGtVXglexsI1tISA8QCav0QUYg</string>
+</resources>

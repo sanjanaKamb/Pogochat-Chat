@@ -1,4 +1,4 @@
-package com.example.ece496.pogochat_chat;
+package com.nullterminator.pogochat;
 
 import android.content.ContentValues;
 import android.content.Context;
