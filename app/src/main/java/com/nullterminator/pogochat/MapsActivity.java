@@ -1,9 +1,22 @@
 package com.nullterminator.pogochat;
 
+import android.*;
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private GoogleMap mMap;
 
     @Override
@@ -50,8 +63,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //The key argument here must match that used in the other activity
         }
 
-        LatLng latLng = new LatLng(43.6532, -79.3832);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // only for gingerbread and newer versions
+            int hasWriteContactsPermission = checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+                if (!shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    showMessageOKCancel("You need to allow access to Location",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                                            REQUEST_CODE_ASK_PERMISSIONS);
+                                }
+                            });
+                    return;
+                }
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+                return;
+            }
+            mMap.setMyLocationEnabled(true);
+        }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location myLocation = locationManager.getLastKnownLocation(provider);
+        LatLng currLoc = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(currLoc, 15);
+        mMap.animateCamera(yourLocation);
+    }
+
+    private void showMessageOKCancel (String message, DialogInterface.OnClickListener
+            okListener){
+        new AlertDialog.Builder(MapsActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    mMap.setMyLocationEnabled(true);
+                } else {
+                    // Permission Denied
+                    Toast.makeText(MapsActivity.this, "ACCESS_COARSE_LOCATION Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
