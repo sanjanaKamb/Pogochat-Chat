@@ -138,9 +138,9 @@ public class LoginActivity extends AppCompatActivity {
                         // Inserting row in users table
                         db.addUser(color, username, uid, created_at);
 
-                        // Launch main activity
+                        // Launch list activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                ListActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

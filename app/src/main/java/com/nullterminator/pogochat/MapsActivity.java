@@ -68,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             int hasWriteContactsPermission = checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION);
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
                 if (!shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    showMessageOKCancel("You need to allow access to Location",
+                    showMessageOKCancel("Location Permission Required To View Current Location",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
